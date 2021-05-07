@@ -18,6 +18,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RecipeService} from './recipes/recipe.service';
 import {HttpClientModule} from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
+import {StoreModule} from '@ngrx/store';
+import * as appReducer from './store';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,8 @@ import { AuthComponent } from './auth/auth.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    StoreModule.forRoot(appReducer.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     HttpClientModule
   ],
   providers: [ShoppingListService, RecipeService],
